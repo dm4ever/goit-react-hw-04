@@ -1,7 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
-axios.defaults.baseURL = "https://api.unsplash.com";
+axios.defaults.baseURL = "https://api.unsplash.com/search/photos?client_id=";
 
 export const getPhotos = async (searchQuery, page) => {
   try {
@@ -12,7 +12,7 @@ export const getPhotos = async (searchQuery, page) => {
         query: query,
         page: page,
         per_page: 10,
-        orientation: 'landscape'
+        orientation: 'landscape',
       },
     });
     return response.data.results;

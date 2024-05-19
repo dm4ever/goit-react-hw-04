@@ -1,6 +1,6 @@
 import css from './ImageCard.module.css'
 
-function ImageCard({ urls: { small, regular }, alt }) {
+function ImageCard({ url: { small, regular } , alt }) {
     return (
         <div>
            <img src={small} alt={alt} />

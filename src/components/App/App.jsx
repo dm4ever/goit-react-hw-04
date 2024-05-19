@@ -16,16 +16,16 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showBtn, setShowBtn] = useState(false);
 
-   useEffect(() => {
+  useEffect(() => {
+    if (!searchQuery) return;
     async function fetchPhoto() {
-
       try {
         setIsLoad(true);
         setIsError(false);
-        const fetch = await getPhotos(searchQuery, page);
-        // setPhotos(prevState => [...prevState, fetch]);
-        setPhotos(response.data.results);
+        const images = await getPhotos(searchQuery, page);
+        setPhotos(prevState => [...prevState, ...images]);
       } catch {
         toast.error("Error fetching. Please try again!");
         setIsError(true);
@@ -37,10 +37,10 @@ function App() {
   }, [searchQuery, page]);
 
    const handleSearch = async (photo) => {
-    setSearchQuery(photo);
-    setPage(1);
+     setSearchQuery(photo);
+     setPage(1);
+     setShowBtn(photos.total_pages && photos.total_pages !== page);
      setPhotos([]);
-     console.log(photo);
   };
 
   const handleLoadMore = async () => {
@@ -58,8 +58,8 @@ function App() {
           containerStyle={{ position: 'relative', }}
           reverseOrder={true} />
         {photos.length > 0 && <ImageGallery data={photos} />}
-        {isLoad !== false && (<Loader />)}
-        {/* {photos.length > 0 && !isLoad && (<LoadMoreBtn onLoadMore={handleLoadMore} />)} */}
+        {isLoad && (<Loader />)}
+        {showBtn && (<LoadMoreBtn onLoadMore={handleLoadMore} />)}
       </div>
     </>
   )
