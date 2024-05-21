@@ -15,7 +15,11 @@ export const getPhotos = async (searchQuery, page) => {
         orientation: 'landscape',
       },
     });
-    return response.data.results;
+    const total_pages = response.data.total_pages;
+    return {
+      results: response.data.results,
+      total_pages: total_pages,
+    };
   } catch (error) {
     toast.error("Server error. Please try again!");
   }

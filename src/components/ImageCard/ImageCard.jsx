@@ -1,9 +1,14 @@
 import css from './ImageCard.module.css'
 
-function ImageCard({ url: { small, regular } , alt }) {
+function ImageCard({photo, openModal, onAfterOpen }) {
+
+    const handleClick = () => {
+        openModal();
+        onAfterOpen(photo);
+    }
     return (
         <div>
-           <img src={small} alt={alt} />
+            <img onClick={handleClick} src={photo.urls.small} alt={photo.alt} className={css.image} />
         </div>
     );
 };

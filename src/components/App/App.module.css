@@ -47,3 +47,12 @@
 .toaster {
   margin-top: 100px;
 }
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 60px;
+  background-color: rgb(147, 207, 244);
+}

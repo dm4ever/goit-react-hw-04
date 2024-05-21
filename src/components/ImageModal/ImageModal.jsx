@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+Modal.setAppElement('#root');
+import css from './ImageModal.module.css'
 
 const customStyles = {
   content: {
@@ -11,51 +11,28 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
+    overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
 };
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement('#yourAppElement');
-
-function App() {
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
+function ImageModal({closeModal, modalIsOpen, photo}) {
   return (
-    <div>
-      <button onClick={openModal}>Open Modal</button>
       <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      style={customStyles}
+      contentLabel="Example Modal"
+      closeTimeoutMS={400}
+      className={css.modal}
+    >
+      <img src={photo.urls.regular} alt={photo.alt_description} />
+      <div className={css.modalInfo}>
+        <p className={css.modalText}>{photo.alt_description}</p>
+        <p className={css.modalText}>Author: {photo.user.name}</p>
+      </div>
       </Modal>
-    </div>
   );
 }
 
-ReactDOM.render(<App />, appElement);
+export default ImageModal

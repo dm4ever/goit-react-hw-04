@@ -1,8 +1,9 @@
 import { Vortex } from 'react-loader-spinner'
+import css from './Loader.module.css'
 
 function Loader() {
   return (
-    <div>
+    <div className={css.loader}>
      <Vortex
       visible={true}
       height="80"

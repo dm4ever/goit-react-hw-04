@@ -17,8 +17,8 @@ function SearchBar({ onSearch }) {
       }}
     >
       <Form className={css.form}>
-        <Field className={css.input} type="text" name="query" placeholder="Search images and photos" />
-        <button type="submit">Search</button>
+        <Field className={css.input} type="text" name="query" placeholder="   Search images and photos" />
+        <button className={css.button} type="submit">Search</button>
       </Form>
     </Formik>
   );

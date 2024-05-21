@@ -1,15 +1,16 @@
 import ImageCard from '../ImageCard/ImageCard'
 import css from './ImageGallery.module.css'
 
-function ImageGallery({data}) {
+function ImageGallery({data, openModal, onAfterOpen}) {
     return (
-        <ul>
+        <ul className={css.gallery}>
             {data.map(photo => {
                 return (
-                    <li key={photo.id} >
+                    <li key={photo.id} className={css.galleryItem}>
                         <ImageCard
-                            url={photo.urls}
-                            alt={photo.alt_description}
+                            photo={photo}
+                            openModal={openModal}
+                            onAfterOpen={onAfterOpen}
                         />
                     </li>
                 );
